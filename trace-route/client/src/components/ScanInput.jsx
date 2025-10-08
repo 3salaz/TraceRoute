@@ -1,11 +1,19 @@
-import React, {useState} from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function ScanInput() {
 
     const [target, setTarget] = useState("");
     const [loading, setLoading] = useState(false);
+    const [history, setHistory] = useState([]);
     const [error, setError] = useState(null);
     const [result, setResult] = useState(null);
+
+
+    const saveToHistory = (entry) => {
+        const updated = [entry, ...history].slice(0, 10); // keep last 10
+        setHistory(updated);
+        localStorage.setItem("scanHistory", JSON.stringify(updated));
+    };
 
     const handleRunScan = async () => {
         if (!target.trim()) return;
@@ -23,6 +31,7 @@ export default function ScanInput() {
             const data = await res.json();
 
             setResult(data);
+            saveToHistory({ target, timestamp: data.timestamp, result: data });
         } catch (err) {
             setError("An error occurred while running the scan.");
             console.error(err);
@@ -31,6 +40,19 @@ export default function ScanInput() {
         }
 
     }
+
+
+    useEffect(() => {
+        const stored = localStorage.getItem("scanHistory");
+        if (stored) setHistory(JSON.parse(stored));
+    }, []);
+
+
+    // For Rendering
+    const loadHistoryItem = (item) => {
+        setTarget(item.target);
+        setResult(item.result);
+    };
 
     return (
         <div className="p-4 max-w-xl mx-auto">
@@ -84,6 +106,26 @@ export default function ScanInput() {
                     <p className="text-sm text-gray-500 mt-2">
                         Last updated: {new Date(result.timestamp).toLocaleString()}
                     </p>
+                </div>
+            )}
+
+            {history.length > 0 && (
+                <div className="bg-white p-4 rounded shadow-sm">
+                    <h4 className="font-semibold mb-2">Recent Scans</h4>
+                    <ul className="space-y-1">
+                        {history.map((item, idx) => (
+                            <li
+                                key={idx}
+                                className="cursor-pointer hover:bg-gray-100 p-2 rounded flex justify-between"
+                                onClick={() => loadHistoryItem(item)}
+                            >
+                                <span>{item.target}</span>
+                                <span className="text-gray-500 text-sm">
+                                    {new Date(item.timestamp).toLocaleTimeString()}
+                                </span>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
             )}
         </div>
