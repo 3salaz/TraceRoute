@@ -60,7 +60,7 @@ export default function ScanInput() {
             <h2 className="text-2xl font-semibold mb-4 text-center text-green-700">
                 TraceRoute Scanner
             </h2>
-
+            
             <div className="flex mb-4">
                 <input
                     type="text"
