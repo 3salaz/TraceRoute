@@ -1,10 +1,10 @@
 import Sidebar from "../Sidebar";
 import Header from "../Header";
 
-export default function DashboardLayout({ children }) {
+export default function DashboardLayout({ children, activeView, setActiveView }) {
   return (
     <div className="flex h-screen bg-gray-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors">
-      <Sidebar />
+      <Sidebar activeView={activeView} setActiveView={setActiveView} />
 
       {/* Main content area */}
       <div className="flex flex-col flex-1">

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ChartBarIcon, ClockIcon, Cog6ToothIcon } from "@heroicons/react/24/outline";
 
-export default function Sidebar() {
+export default function Sidebar({activeView, setActiveView}) {
   const [active, setActive] = useState("scanner");
 
   const menu = [
@@ -17,9 +17,9 @@ export default function Sidebar() {
         {menu.map((item) => (
           <button
             key={item.id}
-            onClick={() => setActive(item.id)}
+            onClick={() => setActiveView(item.id)}
             className={`flex items-center w-full px-3 py-2 rounded-lg transition ${
-              active === item.id
+              activeView === item.id
                 ? "bg-green-600 text-white"
                 : "hover:bg-green-50 dark:hover:bg-slate-700"
             }`}
