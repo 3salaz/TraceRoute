@@ -47,7 +47,7 @@ export default function ScanInput() {
                     className="border rounded-l px-3 py-2 w-full"
                 />
                 <button
-                    onClick={runScan}
+                    onClick={handleRunScan}
                     className="bg-green-600 text-white px-4 py-2 rounded-r"
                 >
                     {loading ? "Scanning..." : "Scan"}
