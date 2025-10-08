@@ -2,7 +2,6 @@ import { useState } from "react";
 import { ChartBarIcon, ClockIcon, Cog6ToothIcon } from "@heroicons/react/24/outline";
 
 export default function Sidebar({activeView, setActiveView}) {
-  const [active, setActive] = useState("scanner");
 
   const menu = [
     { id: "scanner", label: "Scanner", icon: ChartBarIcon },
@@ -11,7 +10,7 @@ export default function Sidebar({activeView, setActiveView}) {
   ];
 
   return (
-    <aside className="w-20 sm:w-56 bg-white/80 dark:bg-slate-800 backdrop-blur-md shadow-lg flex flex-col">
+    <aside className="w-16 sm:w-56 flex-shrink-0 bg-white/80 dark:bg-slate-800 backdrop-blur-md shadow-lg flex flex-col">
       <div className="p-4 font-bold text-green-600 text-center">TraceRoute</div>
       <nav className="flex-1 space-y-2 p-2">
         {menu.map((item) => (
