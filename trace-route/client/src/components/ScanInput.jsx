@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import LatencyChart from './LatencyChart';
 
 export default function ScanInput() {
 
@@ -106,8 +107,11 @@ export default function ScanInput() {
                     <p className="text-sm text-gray-500 mt-2">
                         Last updated: {new Date(result.timestamp).toLocaleString()}
                     </p>
+                    <LatencyChart ports={result.ports} />
                 </div>
+
             )}
+
 
             {history.length > 0 && (
                 <div className="bg-white p-4 rounded shadow-sm">
