@@ -1,12 +1,29 @@
 import './App.css'
 import ScanInput from './components/ScanInput';
+import DashboardLayout from './components/Layout/DashboardLayout';
+import { useState } from 'react';
+import SettingsView from './components/SettingsView';
+import HistoryView from './components/HistoryView';
+
 
 function App() {
-
+  const [activeView, setActiveView] = useState("scanner");
+  const renderView = () => {
+    switch (activeView) {
+      case "scanner":
+        return <ScanInput />;
+      case "history":
+        return <HistoryView />;
+      case "settings":
+        return <SettingsView />;
+      default:
+        return <ScanInput />;
+    }
+  }
   return (
-    <div className="bg-slate-50 w-full h-screen flex items-center justify-center">
-      <ScanInput/>
-    </div>
+    <DashboardLayout activeView={activeView} setActiveView={setActiveView}>
+      {renderView()}
+    </DashboardLayout>
   )
 }
 export default App
