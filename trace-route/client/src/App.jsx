@@ -1,12 +1,12 @@
 import './App.css'
 import ScanInput from './components/ScanInput';
+import DashboardLayout from './components/Layout/DashboardLayout';
 
 function App() {
-
   return (
-    <div className="bg-slate-50 w-full h-screen flex items-center justify-center">
+    <DashboardLayout>
       <ScanInput/>
-    </div>
+    </DashboardLayout>
   )
 }
 export default App
