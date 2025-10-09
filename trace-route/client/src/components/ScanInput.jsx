@@ -16,12 +16,14 @@ export default function ScanInput() {
         localStorage.setItem("scanHistory", JSON.stringify(updated));
     };
 
+    const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
     const handleRunScan = async () => {
         if (!target.trim()) return;
         setLoading(true);
 
         try {
-            const res = await fetch("/api/scan", {
+            const res = await fetch(`${API_BASE}/api/scan`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
